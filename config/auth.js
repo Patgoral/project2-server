@@ -16,10 +16,11 @@ const User = require('../models/user')
 const strategy = new Strategy(opts, function (jwt_payload, done) {
 	User.findById(jwt_payload.id)
 		.then((user) => done(null, user))
-		.then((user) => done(null, user))
 })
 
 passport.use(strategy)
+
+passport.initialize()
 
 const requireToken = passport.authenticate('jwt', { session: false })
 
@@ -37,6 +38,6 @@ const createUserToken = (req, user) => {
 }
 
 module.exports = {
-	requireToken,
-	createUserToken,
+    createUserToken,
+	requireToken
 }

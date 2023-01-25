@@ -6,7 +6,7 @@ const router = express.Router()
 
 // CREATE
 router.post('/parts', (req, res, next) => {
-    const ticketId= req.body.part.ticketId
+    const ticketId = req.body.part.ticketId
    
     const part = req.body.part
 
@@ -14,6 +14,7 @@ router.post('/parts', (req, res, next) => {
         .then(handle404)
         .then(ticket => {
             ticket.parts.push(part)
+                return ticket.save()
         })
         .then (ticket => {
             res.status(201).json({ ticket: ticket })

@@ -1,32 +1,32 @@
 {
-  "dependencies": {
-    "bcrypt": "^5.1.0",
-    "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.0",
-    "mongoose": "^6.8.4",
-    "passport": "^0.6.0",
-    "passport-jwt": "^4.0.1"
-  },
-  "name": "service-manager-server",
-  "description": "",
-  "version": "1.0.0",
-  "main": "server.js",
-  "directories": {
-    "lib": "lib"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Patgoral/project2-server.git"
-  },
-  "author": "Pat Goral",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Patgoral/project2-server/issues"
-  },
-  "homepage": "https://github.com/Patgoral/project2-server#readme"
+	"name": "service-manager-server",
+	"description": "",
+	"version": "1.0.0",
+	"main": "server.js",
+	"directories": {
+		"lib": "lib"
+	},
+	"devDependencies": {},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Patgoral/project2-server.git"
+	},
+	"author": "Pat Goral",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Patgoral/project2-server/issues"
+	},
+	"homepage": "https://github.com/Patgoral/project2-server#readme",
+	"dependencies": {
+		"bcrypt": "^5.1.0",
+		"cors": "^2.8.5",
+		"express": "^4.18.2",
+		"jsonwebtoken": "^9.0.0",
+		"mongoose": "^6.8.4",
+		"passport": "^0.6.0",
+		"passport-jwt": "^4.0.1"
+	}
 }

@@ -14,13 +14,13 @@ const PORT = 8000
 mongoose.set('strictQuery', true)
 
 mongoose.connect(db, {
-    useNewUrlParser: true,
+	useNewUrlParser: true,
 	useUnifiedTopology: true,
 })
 
 const app = express()
 
-app.use(cors({ origin: `http://127.0.0.1:5500` }))
+app.use(cors({ origin: `http://127.0.0.1:5505` }))
 
 app.use(express.json())
 app.use(requestLogger)
@@ -31,7 +31,7 @@ app.use(partRoutes)
 app.use(userRoutes)
 
 app.listen(PORT, () => {
-    console.log('Listening on port ' + PORT)
+	console.log('Listening on port ' + PORT)
 })
 
 module.exports = app
