@@ -5,8 +5,8 @@ const { handle404 } = require('../lib/custom-errors')
 const router = express.Router()
 
 // CREATE
-router.post('/parts', (req, res, next) => {
-    const ticketId = req.body.part.ticketId
+router.post('/tickets/:ticketId/parts', (req, res, next) => {
+    const ticketId = req.params.ticketId
    
     const part = req.body.part
 
@@ -23,17 +23,20 @@ router.post('/parts', (req, res, next) => {
 })
 
 // DELETE
-router.delete('/parts/:partId', (req, res, next) => {
-    const ticketId = req.body.part.ticketId
+router.delete('/tickets/:ticketId/parts/:partId', (req, res, next) => {
+    const ticketId = req.params.ticketId
 
     Ticket.findById(ticketId)
     .then(handle404)
     .then(ticket => {
         ticket.parts.id(req.params.partId).remove()
 
-        return ticket.save()
+        ticket.save()
     })
-    .then(() => res.sendStatus(204))
+    .then(res => {
+        res.data = Ticket.findById(ticketId)
+        return res
+    })
     .catch(next)
 })
 

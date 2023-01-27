@@ -1,11 +1,10 @@
 const express = require('express')
 const { handle404 } = require('../lib/custom-errors')
 const Ticket = require('../models/ticket')
-const { requireToken } = require('../config/auth')
 const router = express.Router()
 
 // INDEX
-router.get('/tickets',(req, res, next) => {
+router.get('/tickets', (req, res, next) => {
 	Ticket.find()
 		.then((tickets) => {
 			return tickets.map((ticket) => ticket)
