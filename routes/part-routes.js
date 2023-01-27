@@ -25,18 +25,23 @@ router.post('/tickets/:ticketId/parts', (req, res, next) => {
 // DELETE
 router.delete('/tickets/:ticketId/parts/:partId', (req, res, next) => {
     const ticketId = req.params.ticketId
-
     Ticket.findById(ticketId)
     .then(handle404)
-    .then(ticket => {
-        ticket.parts.id(req.params.partId).remove()
-
-        ticket.save()
+    .then((ticket) => {
+      
+const updatedParts = ticket.parts.map(part => {
+    if(part.id !== req.params.partId){
+        return part;
+    }
+})
+ticket.parts = updatedParts;
+ticket.save()
     })
     .then(res => {
-        res.data = Ticket.findById(ticketId)
-        return res
+        res = Ticket.findById(ticketId)
+        return 
     })
+    .then(() => res.sendStatus(204))
     .catch(next)
 })
 
