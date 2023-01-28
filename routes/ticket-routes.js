@@ -2,6 +2,7 @@ const express = require('express')
 const { handle404 } = require('../lib/custom-errors')
 const Ticket = require('../models/ticket')
 const router = express.Router()
+const { requireToken } = require('../config/auth')
 
 // INDEX
 router.get('/tickets', (req, res, next) => {
@@ -31,7 +32,7 @@ router.post('/tickets', (req, res, next) => {
 })
 
 // UPDATE
-router.patch('/tickets/:id', (req, res, next) => {
+router.patch('/tickets/:id', requireToken, (req, res, next) => {
 	Ticket.findById(req.params.id)
 		.then(handle404)
 		.then((ticket) => {
@@ -42,7 +43,7 @@ router.patch('/tickets/:id', (req, res, next) => {
 })
 
 // DELETE
-router.delete('/tickets/:id', (req, res, next) => {
+router.delete('/tickets/:id', requireToken, (req, res, next) => {
 	Ticket.findById(req.params.id)
 		.then(handle404)
 		.then((ticket) => {
