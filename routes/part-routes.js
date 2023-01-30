@@ -25,24 +25,16 @@ router.post('/tickets/:ticketId/parts', (req, res, next) => {
 // DELETE
 router.delete('/tickets/:ticketId/parts/:partId', (req, res, next) => {
     const ticketId = req.params.ticketId
+    const partId = req.params.partId
     Ticket.findById(ticketId)
-    .then(handle404)
-    .then((ticket) => {
-      
-const updatedParts = ticket.parts.map(part => {
-    if(part.id !== req.params.partId){
-        return part;
-    }
-})
-ticket.parts = updatedParts;
-ticket.save()
+    .then(ticket => {
+    ticket.parts.id(partId).remove()
+        ticket.save().then(updatedTicket => {
+            res.send(updatedTicket)
+        })
+    }).catch(e => {
+        return e;
     })
-    .then(res => {
-        res = Ticket.findById(ticketId)
-        return 
-    })
-    .then(() => res.sendStatus(204))
-    .catch(next)
 })
 
 module.exports = router

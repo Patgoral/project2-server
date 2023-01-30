@@ -10,15 +10,15 @@ const router = express.Router()
 router.post('/sign-up', (req, res, next) => {
     bcrypt
         .hash(req.body.credentials.password, 10)
-        .then(hashedPassword => {
+        .then(hash => {
             return {
                 username: req.body.credentials.username,
-                password: hashedPassword
+                password: hash
             }
         })
-        .then(user => User.create(user))
-        .then(user => {
-            res.status(201).json({ user: user })
+        .then((user) => User.create(user))
+        .then((user) => {
+            res.status(201).json(user)
         })
         .catch(next)
 })
@@ -28,8 +28,8 @@ router.post('/sign-up', (req, res, next) => {
 
 router.post('/sign-in', (req, res, next) => {
     User.findOne({ username: req.body.credentials.username })
-        .then(user => createUserToken(req, user))
-        .then(token => res.json({ token: token }))
+        .then((user) => createUserToken(req, user))
+        .then((token) => res.json({ token }))
         .catch(next)
 })
 module.exports = router

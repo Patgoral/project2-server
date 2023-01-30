@@ -32,7 +32,7 @@ router.post('/tickets', (req, res, next) => {
 })
 
 // UPDATE
-router.patch('/tickets/:id', requireToken, (req, res, next) => {
+router.patch('/tickets/:id', (req, res, next) => {
 	Ticket.findById(req.params.id)
 		.then(handle404)
 		.then((ticket) => {
@@ -43,7 +43,7 @@ router.patch('/tickets/:id', requireToken, (req, res, next) => {
 })
 
 // DELETE
-router.delete('/tickets/:id', requireToken, (req, res, next) => {
+router.delete('/tickets/:id', (req, res, next) => {
 	Ticket.findById(req.params.id)
 		.then(handle404)
 		.then((ticket) => {
