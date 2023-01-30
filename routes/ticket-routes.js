@@ -23,7 +23,11 @@ router.get('/tickets/:id', (req, res, next) => {
 })
 
 // CREATE
-router.post('/tickets', (req, res, next) => {
+router.post('/tickets', requireToken, (req, res, next) => {
+	console.log(req.user)
+	const ticket = req.body.ticket
+	ticket.owner = req.user._id
+
 	Ticket.create(req.body.ticket)
 		.then((ticket) => {
 			res.status(201).json({ ticket: ticket })
@@ -32,22 +36,33 @@ router.post('/tickets', (req, res, next) => {
 })
 
 // UPDATE
-router.patch('/tickets/:id', (req, res, next) => {
+router.patch('/tickets/:id', requireToken, (req, res, next) => {
+	const ticket = req.body.ticket
+
 	Ticket.findById(req.params.id)
 		.then(handle404)
 		.then((ticket) => {
-			return ticket.updateOne(req.body.ticket)
+			if (ticket.owner.equals(req.user._id)) {
+				return ticket.updateOne(req.body.ticket)
+			} else {
+				return
+			}
 		})
 		.then(() => res.sendStatus(204))
 		.catch(next)
 })
 
 // DELETE
-router.delete('/tickets/:id', (req, res, next) => {
+router.delete('/tickets/:id', requireToken, (req, res, next) => {
 	Ticket.findById(req.params.id)
 		.then(handle404)
 		.then((ticket) => {
-			ticket.deleteOne()
+			if (ticket.owner.equals(req.user._id)) {
+				return ticket.deleteOne()
+			} else {
+				return
+			}
+			
 		})
 		.then(() => res.sendStatus(204))
 		.catch(next)

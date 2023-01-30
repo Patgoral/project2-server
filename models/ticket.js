@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const partSchema = require('./part')
+const userSchema = require('./user')
 
 const Schema = mongoose.Schema
 
@@ -23,6 +24,7 @@ const ticketSchema = new Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
         },
+       
     },
     {
         timestamps: true,
