@@ -36,7 +36,7 @@ You can visit the page at this link: (Bike Shop Service Manager)
 | Index       | /tickets/                        |GET          |Displays all tickets|
 | Create      | /tickets/                        |POST         |Creates new ticket  |
 | Show        | /tickets/:ticketId               |GET          |Displays one ticket |
-| Update      | /tickets/:ticketId               |PATCH        |Upates one ticket   |
+| Update      | /tickets/:ticketId               |PATCH        |Updates one ticket   |
 | Delete      | /tickets/:ticketId               |DELETE       |Deletes one ticket  |
 | Create      | /tickets/:ticketId/parts/        |POST         |Creates new part    |
 | Delete      | /tickets/:ticketId/parts/:partID |DELETE       |deletes one  part   |
