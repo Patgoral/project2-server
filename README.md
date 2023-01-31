@@ -23,7 +23,7 @@ An app for bike shop employees to create service tickets to track their service 
 
 ## Entity Relationship Diagram (ERD): ##
 
-<img src="/PlanningDocs/PlanningWireframes/ERD.png" width="500" height="250"/>
+<img src="img/ERD.png" width="500" height="250"/>
 
 ## Getting Started: ##
 You can visit the page at this link: (Bike Shop Service Manager)
