@@ -26,7 +26,7 @@ app.use(express.json())
 app.use(requestLogger)
 
 app.use(ticketRoutes)
-app.use('/seed', ticketSeed)
+app.use('/seed', ticketSeed) // Nice seed route
 app.use(partRoutes)
 app.use(userRoutes)
 

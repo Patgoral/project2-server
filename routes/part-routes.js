@@ -7,7 +7,7 @@ const router = express.Router()
 // CREATE
 router.post('/tickets/:ticketId/parts', (req, res, next) => {
     const ticketId = req.params.ticketId
-   
+
     const part = req.body.part
 
     Ticket.findById(ticketId)
@@ -27,13 +27,13 @@ router.delete('/tickets/:ticketId/parts/:partId', (req, res, next) => {
     const ticketId = req.params.ticketId
     const partId = req.params.partId
     Ticket.findById(ticketId)
-    .then(ticket => {
+    .then(ticket => {// indentation gets away from you here and things get quite jumbled
     ticket.parts.id(partId).remove()
         ticket.save().then(updatedTicket => {
             res.send(updatedTicket)
         })
     }).catch(e => {
-        return e;
+        return e;// no use of next to pass stuff to our error handling ? 
     })
 })
 
