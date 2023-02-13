@@ -26,7 +26,7 @@ router.get('/tickets/:id', (req, res, next) => {
 router.post('/tickets', requireToken, (req, res, next) => {
 	console.log(req.user)
 	const ticket = req.body.ticket
-	ticket.owner = req.user._id
+	ticket.owner = req.user._id // 
 
 	Ticket.create(req.body.ticket)
 		.then((ticket) => {
@@ -37,15 +37,15 @@ router.post('/tickets', requireToken, (req, res, next) => {
 
 // UPDATE
 router.patch('/tickets/:id', requireToken, (req, res, next) => {
-	const ticket = req.body.ticket
+	const ticket = req.body.ticket // ah, i see we have 2 variables in scope(below) with the same name of ticket, consider a new name of ticketData or something similar to allow us to dry up line 46
 
 	Ticket.findById(req.params.id)
 		.then(handle404)
-		.then((ticket) => {
-			if (ticket.owner.equals(req.user._id)) {
+		.then((ticket) => { 
+			if (ticket.owner.equals(req.user._id)) { // YAS!!!!!
 				return ticket.updateOne(req.body.ticket)
 			} else {
-				return
+				return // consider returning an authorization error
 			}
 		})
 		.then(() => res.sendStatus(204))
@@ -57,12 +57,12 @@ router.delete('/tickets/:id', requireToken, (req, res, next) => {
 	Ticket.findById(req.params.id)
 		.then(handle404)
 		.then((ticket) => {
-			if (ticket.owner.equals(req.user._id)) {
+			if (ticket.owner.equals(req.user._id)) { // great use of model.id.equals()
 				return ticket.deleteOne()
 			} else {
-				return
+				return // see 48
 			}
-			
+			// inconsistent whitespace
 		})
 		.then(() => res.sendStatus(204))
 		.catch(next)
